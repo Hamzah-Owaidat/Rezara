@@ -1,9 +1,16 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
 }
 
 model User {
@@ -11,7 +18,7 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      String   @default("user")
+  role      Role     @default(VIEWER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
